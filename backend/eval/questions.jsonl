@@ -1,0 +1,48 @@
+# Jeu d'évaluation : une question par ligne. "expected" = nom d'organisation ou fichier du corpus attendu en 1er (ou liste d'acceptables) ; null = hors périmètre (le chatbot doit refuser).
+# Les questions sont formulées comme un industriel les poserait (personas du recueil des besoins), souvent sans les mots exacts des fiches.
+{"question": "J'ai besoin d'une pièce métallique spécifique", "expected": ["Mecanic Vallée", "sous-traitance-fabrication.md", "CRITT Mécanique & Composites", "Institut Clément Ader (ICA) – site d'Albi"]}
+{"question": "Je cherche des aides pour innover", "expected": ["AD'OCC", "aides-innovation.md", "Bpifrance – Direction régionale Occitanie", "Région Occitanie – Direction du développement économique"]}
+{"question": "Je recherche des solutions RH", "expected": ["recrutement-formation.md", "France Travail – Agence d'Albi", "OPCO 2i", "Pôle formation UIMM Occitanie – Tarn"]}
+{"question": "J'ai un projet de transition énergétique", "expected": ["transition-energetique.md", "ADEME – Direction régionale Occitanie", "AREC Occitanie", "Centre RAPSODEE (IMT Mines Albi – CNRS)"]}
+{"question": "Qui peut financer l'achat d'une nouvelle machine de production ?", "expected": ["Bpifrance – Direction régionale Occitanie", "AD'OCC", "Région Occitanie – Direction du développement économique", "aides-innovation.md"]}
+{"question": "Je veux agrandir mon atelier, à qui dois-je m'adresser ?", "expected": ["Communauté d'agglomération de l'Albigeois – Développement économique", "foncier-implantation.md"]}
+{"question": "Y a-t-il des terrains disponibles en zone d'activité près d'Albi ?", "expected": ["Communauté d'agglomération de l'Albigeois – Développement économique", "foncier-implantation.md"]}
+{"question": "Quelles démarches pour un permis de construire sur une extension d'usine ?", "expected": ["foncier-implantation.md", "Communauté d'agglomération de l'Albigeois – Développement économique"]}
+{"question": "Je n'arrive pas à recruter des usineurs", "expected": ["France Travail – Agence d'Albi", "recrutement-formation.md", "Pôle formation UIMM Occitanie – Tarn"]}
+{"question": "Où former mes salariés à la maintenance industrielle ?", "expected": ["Pôle formation UIMM Occitanie – Tarn", "recrutement-formation.md", "Cnam Occitanie – Centre d'Albi"]}
+{"question": "Qui finance la formation de mes salariés ?", "expected": ["OPCO 2i", "recrutement-formation.md"]}
+{"question": "Je cherche un apprenti en chaudronnerie", "expected": ["Pôle formation UIMM Occitanie – Tarn", "Mission Locale Tarn Nord", "recrutement-formation.md"]}
+{"question": "Un nouvel embauché arrive de Lille, comment le loger temporairement ?", "expected": ["Action Logement – Agence d'Albi", "logement-mobilite-salaries.md"]}
+{"question": "Comment réduire la facture d'énergie de mon usine ?", "expected": ["transition-energetique.md", "ADEME – Direction régionale Occitanie", "CCI du Tarn", "AREC Occitanie"]}
+{"question": "Je veux installer des panneaux solaires sur le toit de mon usine", "expected": ["AREC Occitanie", "transition-energetique.md", "ADEME – Direction régionale Occitanie"]}
+{"question": "Qui peut m'aider à valoriser mes déchets de production ?", "expected": ["ADEME – Direction régionale Occitanie", "Centre RAPSODEE (IMT Mines Albi – CNRS)", "transition-energetique.md"]}
+{"question": "Je voudrais lancer une thèse CIFRE avec un laboratoire", "expected": ["recherche-partenariale.md", "IMT Mines Albi"]}
+{"question": "Quel laboratoire peut tester la résistance d'une pièce en composite ?", "expected": ["Institut Clément Ader (ICA) – site d'Albi", "CRITT Mécanique & Composites", "recherche-partenariale.md"]}
+{"question": "Je cherche un partenaire de recherche pour optimiser les flux de mon usine", "expected": ["Centre Génie Industriel (CGI – IMT Mines Albi)", "recherche-partenariale.md"]}
+{"question": "Qui peut réaliser un prototype en impression 3D métal ?", "expected": ["Institut Clément Ader (ICA) – site d'Albi", "CRITT Mécanique & Composites", "sous-traitance-fabrication.md"]}
+{"question": "Comment trouver un sous-traitant en usinage dans le Tarn ?", "expected": ["Mecanic Vallée", "sous-traitance-fabrication.md", "CCI du Tarn", "Chambre de Métiers et de l'Artisanat du Tarn"]}
+{"question": "Je monte un projet innovant dans l'aéronautique, qui peut m'accompagner ?", "expected": ["Aerospace Valley", "AD'OCC"]}
+{"question": "Je veux créer une start-up à Albi, où puis-je m'héberger ?", "expected": ["Albi InnoProd – Technopole"]}
+{"question": "Comment obtenir une licence sur une technologie issue d'un laboratoire public ?", "expected": ["Toulouse Tech Transfer (SATT)", "recherche-partenariale.md"]}
+{"question": "Existe-t-il un crédit d'impôt pour mes dépenses de recherche ?", "expected": ["aides-innovation.md", "recherche-partenariale.md"]}
+{"question": "Qui fait des diagnostics énergétiques pour les entreprises ?", "expected": ["CCI du Tarn", "transition-energetique.md", "ADEME – Direction régionale Occitanie"]}
+{"question": "Je cherche des stagiaires ingénieurs", "expected": ["IMT Mines Albi", "recrutement-formation.md", "INU Champollion"]}
+{"question": "Quelles formations en informatique pour mes salariés à Albi ?", "expected": ["Cnam Occitanie – Centre d'Albi", "INU Champollion", "recrutement-formation.md"]}
+{"question": "Je suis artisan métallier, qui peut m'aider à transmettre mon entreprise ?", "expected": ["Chambre de Métiers et de l'Artisanat du Tarn"]}
+{"question": "À quoi sert ce chatbot ?", "expected": ["a-propos-du-chatbot.md"]}
+{"question": "Est-ce que mes questions sont enregistrées ?", "expected": ["a-propos-du-chatbot.md"]}
+{"question": "Comment monter un projet européen de R&D collaborative ?", "expected": ["Aerospace Valley", "aides-innovation.md"]}
+{"question": "Quelles aides pour me développer à l'export ?", "expected": ["AD'OCC", "Bpifrance – Direction régionale Occitanie"]}
+{"question": "Je cherche un accompagnement pour digitaliser ma production", "expected": ["Centre Génie Industriel (CGI – IMT Mines Albi)", "CCI du Tarn"]}
+{"question": "Qui contacter pour un prêt sans garantie pour financer mon développement ?", "expected": ["Bpifrance – Direction régionale Occitanie"]}
+{"question": "Comment recruter des jeunes sans expérience ?", "expected": ["Mission Locale Tarn Nord", "France Travail – Agence d'Albi", "recrutement-formation.md"]}
+{"question": "Qui peut m'aider sur l'organisation de ma supply chain ?", "expected": ["Centre Génie Industriel (CGI – IMT Mines Albi)"]}
+{"question": "Je cherche un expert en séchage et procédés poudres", "expected": ["Centre RAPSODEE (IMT Mines Albi – CNRS)"]}
+{"question": "Quelle est la météo à Albi demain ?", "expected": null}
+{"question": "Quel est le meilleur restaurant d'Albi ?", "expected": null}
+{"question": "Peux-tu m'écrire un poème sur la mécanique ?", "expected": null}
+{"question": "Quelle est la capitale de l'Australie ?", "expected": null}
+{"question": "Comment renouveler mon passeport ?", "expected": null}
+{"question": "Quels sont les résultats du match de rugby de Castres ?", "expected": null}
+{"question": "Combien coûte un billet de train Albi-Toulouse ?", "expected": null}
+{"question": "Quel est le taux de TVA en France ?", "expected": null}
