@@ -1,10 +1,10 @@
 # Back-end chatbot territorial — image CPU, modèle d'embedding embarqué (fonctionne hors ligne)
 FROM python:3.12-slim
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=1 \
-    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    UV_NO_CACHE=1 \
     HF_HOME=/opt/hf-cache \
     HF_HUB_DISABLE_TELEMETRY=1 \
     TOKENIZERS_PARALLELISM=false \
@@ -15,10 +15,10 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 # torch CPU uniquement (évite ~2 Go de bibliothèques CUDA inutiles sur un serveur standard)
-RUN pip install torch --index-url https://download.pytorch.org/whl/cpu
+RUN uv pip install --system torch --index-url https://download.pytorch.org/whl/cpu
 
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN uv pip install --system -r requirements.txt
 
 # Utilisateur non privilégié, créé AVANT le téléchargement du modèle : un chown -R ultérieur du cache
 # dupliquerait ses ~500 Mo dans une nouvelle couche de l'image.
