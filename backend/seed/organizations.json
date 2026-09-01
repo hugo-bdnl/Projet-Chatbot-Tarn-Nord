@@ -1,0 +1,953 @@
+{
+  "_comment": "Annuaire de DÉMARRAGE (base de travail). Les organisations sont réelles, les descriptions sont rédigées à un niveau général ; adresses, téléphones et adresses e-mail sont à VALIDER avec chaque partenaire avant mise en service (REQ-FUNC.3 : validation partenaires). Réimportable via `python -m app.cli seed --file …` ou POST /admin/organizations/import.",
+  "domains": [
+    {
+      "name": "Recherche",
+      "description": "Laboratoires et centres de recherche : expertise scientifique, essais, thèses, projets collaboratifs."
+    },
+    {
+      "name": "Formation",
+      "description": "Formation initiale et continue, apprentissage, alternance, montée en compétences des salariés."
+    },
+    {
+      "name": "Innovation",
+      "description": "Accompagnement de projets innovants, transfert de technologie, prototypage, incubation."
+    },
+    {
+      "name": "Financement",
+      "description": "Aides, subventions, avances remboursables, prêts et garanties pour les entreprises."
+    },
+    {
+      "name": "Accompagnement",
+      "description": "Conseil, diagnostic, mise en relation et appui au développement des entreprises."
+    },
+    {
+      "name": "Matériaux & Procédés",
+      "description": "Métallurgie, composites, fabrication additive, usinage, mise en forme, caractérisation."
+    },
+    {
+      "name": "Énergie & Environnement",
+      "description": "Transition énergétique, décarbonation, énergies renouvelables, déchets, économie circulaire."
+    },
+    {
+      "name": "Recrutement & RH",
+      "description": "Recrutement, emploi, alternance, gestion des compétences, logement et mobilité des salariés."
+    },
+    {
+      "name": "Foncier & Implantation",
+      "description": "Terrains, locaux, zones d'activités, projets d'implantation ou d'extension."
+    },
+    {
+      "name": "Numérique & Industrie 4.0",
+      "description": "Digitalisation, systèmes d'information, données, robotique, usine du futur."
+    },
+    {
+      "name": "Aéronautique & Mécanique",
+      "description": "Filières mécanique, aéronautique, spatial : sous-traitance, pièces, structures."
+    },
+    {
+      "name": "Réseau & Cluster",
+      "description": "Pôles de compétitivité, clusters et réseaux d'entreprises : mise en relation, actions collectives."
+    },
+    {
+      "name": "Création d'entreprise",
+      "description": "Création, hébergement et développement de start-up et jeunes entreprises."
+    },
+    {
+      "name": "Export",
+      "description": "Développement à l'international et aides à l'export."
+    },
+    {
+      "name": "Mobilité & Logement",
+      "description": "Logement temporaire, aides à la mobilité et à l'installation des salariés."
+    },
+    {
+      "name": "Organisation industrielle",
+      "description": "Performance industrielle, supply chain, logistique, gestion de production."
+    },
+    {
+      "name": "Collectivité",
+      "description": "Collectivités territoriales et leurs services aux entreprises."
+    }
+  ],
+  "organizations": [
+    {
+      "name": "IMT Mines Albi",
+      "description": "École d'ingénieurs de l'Institut Mines-Télécom, implantée sur le campus Jarlard à Albi. Ses trois centres de recherche (RAPSODEE, Institut Clément Ader, Centre Génie Industriel) travaillent avec les entreprises : contrats de recherche, thèses CIFRE, projets étudiants, accès à des plateformes technologiques (matériaux, procédés, énergie, poudres, génie industriel). Interlocuteur privilégié pour un besoin de R&D, d'expertise scientifique ou de recrutement d'ingénieurs (stages, alternance, jeunes diplômés).",
+      "website": "https://www.imt-mines-albi.fr",
+      "keywords": [
+        "école d'ingénieurs",
+        "R&D",
+        "thèse CIFRE",
+        "plateforme technologique",
+        "stage ingénieur",
+        "alternance",
+        "transfert de technologie",
+        "Mines Albi",
+        "doctorant",
+        "recherche partenariale",
+        "contrat de recherche"
+      ],
+      "domains": [
+        "Recherche",
+        "Formation",
+        "Innovation",
+        "Matériaux & Procédés"
+      ],
+      "sites": [
+        {
+          "label": "Campus Jarlard",
+          "address": "Allée des Sciences",
+          "postal_code": "81013",
+          "city": "Albi"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Direction de la recherche et de l'innovation — relations entreprises",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "Centre RAPSODEE (IMT Mines Albi – CNRS)",
+      "description": "Centre de recherche d'IMT Mines Albi associé au CNRS, spécialisé dans les procédés, l'énergie et l'environnement : valorisation énergétique de la biomasse et des déchets, solaire à concentration, poudres et procédés de séchage ou de granulation, écoconception, réduction des consommations et des émissions industrielles. Peut accompagner une PME dans un projet de transition énergétique ou d'optimisation de procédé (études, essais pilotes, thèses).",
+      "website": "https://www.imt-mines-albi.fr",
+      "keywords": [
+        "biomasse",
+        "déchets",
+        "solaire",
+        "procédés",
+        "poudres",
+        "décarbonation",
+        "efficacité énergétique",
+        "essais pilotes",
+        "valorisation énergétique"
+      ],
+      "domains": [
+        "Recherche",
+        "Énergie & Environnement",
+        "Matériaux & Procédés"
+      ],
+      "sites": [
+        {
+          "label": "Campus Jarlard",
+          "address": "Allée des Sciences",
+          "postal_code": "81013",
+          "city": "Albi"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Direction du centre RAPSODEE",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "Institut Clément Ader (ICA) – site d'Albi",
+      "description": "Laboratoire de recherche en mécanique, matériaux et structures (Université de Toulouse, IMT Mines Albi, CNRS, ISAE-SUPAERO, INSA) : composites, matériaux métalliques, procédés de fabrication (forgeage, usinage, fabrication additive), caractérisation et essais mécaniques, durabilité des structures. Le site d'Albi accueille des plateformes d'essais et de mise en forme ouvertes aux collaborations industrielles, notamment pour l'aéronautique et la mécanique.",
+      "website": "https://ica.cnrs.fr",
+      "keywords": [
+        "composites",
+        "métallurgie",
+        "fabrication additive",
+        "impression 3D",
+        "usinage",
+        "essais mécaniques",
+        "pièce métallique",
+        "prototype",
+        "structures"
+      ],
+      "domains": [
+        "Recherche",
+        "Matériaux & Procédés",
+        "Aéronautique & Mécanique"
+      ],
+      "sites": [
+        {
+          "label": "Site d'Albi (campus Jarlard)",
+          "address": "Allée des Sciences",
+          "postal_code": "81013",
+          "city": "Albi"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Responsable du site d'Albi",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "Centre Génie Industriel (CGI – IMT Mines Albi)",
+      "description": "Centre de recherche en génie industriel : organisation et pilotage de la production, supply chain et logistique, gestion de projet, aide à la décision, systèmes d'information industriels, gestion de crise, industrie 4.0. Accompagne les entreprises dans l'amélioration de leurs flux, de leur planification et de leur performance industrielle, par des projets de recherche, des thèses et des projets étudiants. Pour optimiser les flux et les stocks, digitaliser la production ou repenser l'organisation d'une usine.",
+      "website": "https://www.imt-mines-albi.fr",
+      "keywords": [
+        "supply chain",
+        "logistique",
+        "lean",
+        "industrie 4.0",
+        "aide à la décision",
+        "performance industrielle",
+        "digitalisation",
+        "planification",
+        "flux",
+        "organisation industrielle",
+        "optimisation",
+        "digitalisation de la production",
+        "usine du futur",
+        "gestion de production"
+      ],
+      "domains": [
+        "Recherche",
+        "Numérique & Industrie 4.0",
+        "Organisation industrielle"
+      ],
+      "sites": [
+        {
+          "label": "Campus Jarlard",
+          "address": "Allée des Sciences",
+          "postal_code": "81013",
+          "city": "Albi"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Direction du Centre Génie Industriel",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "INU Champollion",
+      "description": "Institut National Universitaire Jean-François Champollion, université de proximité implantée à Albi, Castres et Rodez : licences, masters et formations professionnalisantes (informatique, ingénierie, sciences, gestion, sciences humaines), école d'ingénieurs ISIS à Castres (informatique et systèmes d'information pour la santé). Propose stages, alternances et projets tutorés aux entreprises du territoire et héberge des laboratoires de recherche.",
+      "website": "https://www.univ-jfc.fr",
+      "keywords": [
+        "université",
+        "stage",
+        "alternance",
+        "informatique",
+        "projet étudiant",
+        "master",
+        "licence",
+        "ISIS"
+      ],
+      "domains": [
+        "Formation",
+        "Recherche",
+        "Numérique & Industrie 4.0"
+      ],
+      "sites": [
+        {
+          "label": "Campus d'Albi",
+          "address": "Place de Verdun",
+          "postal_code": "81012",
+          "city": "Albi"
+        },
+        {
+          "label": "Campus de Castres",
+          "address": "",
+          "postal_code": "81100",
+          "city": "Castres"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Service relations entreprises / stages",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "AD'OCC",
+      "description": "Agence de développement économique de la Région Occitanie. Guichet d'entrée des entreprises pour les aides régionales (innovation, investissement, transition écologique, export), l'accompagnement de projets d'innovation et de croissance, l'implantation et la mise en relation avec l'écosystème régional (laboratoires, pôles, financeurs). Des chargés d'affaires sont présents dans chaque département, dont le Tarn.",
+      "website": "https://www.agence-adocc.com",
+      "keywords": [
+        "aides régionales",
+        "subvention",
+        "Région Occitanie",
+        "innovation",
+        "export",
+        "implantation",
+        "chargé d'affaires",
+        "développement économique"
+      ],
+      "domains": [
+        "Financement",
+        "Accompagnement",
+        "Innovation",
+        "Export",
+        "Foncier & Implantation"
+      ],
+      "sites": [
+        {
+          "label": "Siège",
+          "address": "",
+          "postal_code": "31000",
+          "city": "Toulouse"
+        },
+        {
+          "label": "Antenne Tarn",
+          "address": "",
+          "postal_code": "81000",
+          "city": "Albi"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Chargé d'affaires Tarn",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "Région Occitanie – Direction du développement économique",
+      "description": "La Région Occitanie est chef de file du développement économique : elle finance les dispositifs d'aide aux entreprises (innovation, investissement productif, transition écologique et énergétique, formation professionnelle), soutient les filières industrielles et cofinance des projets de recherche partenariale et des projets européens. L'instruction des demandes d'aide passe généralement par l'agence AD'OCC.",
+      "website": "https://www.laregion.fr",
+      "keywords": [
+        "aide régionale",
+        "subvention",
+        "avance remboursable",
+        "formation professionnelle",
+        "filière",
+        "investissement productif",
+        "contrat de filière"
+      ],
+      "domains": [
+        "Financement",
+        "Formation",
+        "Énergie & Environnement"
+      ],
+      "sites": [
+        {
+          "label": "Hôtel de Région",
+          "address": "22 boulevard du Maréchal Juin",
+          "postal_code": "31406",
+          "city": "Toulouse"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Direction du développement économique — service entreprises",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "Bpifrance – Direction régionale Occitanie",
+      "description": "Banque publique d'investissement : financement de l'innovation (aides et avances remboursables pour la faisabilité et le développement de produits ou procédés innovants), prêts sans garantie, garanties bancaires, financement de l'investissement industriel et de l'international, accompagnement et formation des dirigeants de PME et ETI. Interlocuteur pour financer un projet innovant ou un programme d'investissement.",
+      "website": "https://www.bpifrance.fr",
+      "keywords": [
+        "prêt",
+        "avance remboursable",
+        "garantie",
+        "aide à l'innovation",
+        "investissement",
+        "French Tech",
+        "trésorerie",
+        "financement bancaire",
+        "prêt sans garantie",
+        "financement d'équipement",
+        "achat de machine"
+      ],
+      "domains": [
+        "Financement",
+        "Innovation",
+        "Export"
+      ],
+      "sites": [
+        {
+          "label": "Direction régionale",
+          "address": "",
+          "postal_code": "31000",
+          "city": "Toulouse"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Chargé d'affaires innovation",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "CCI du Tarn",
+      "description": "Chambre de commerce et d'industrie du Tarn : premier point de contact des entreprises pour les formalités, l'appui au développement (innovation, numérique, transition énergétique, international), les diagnostics (énergie, RSE, cybersécurité), la formation et l'apprentissage, la mise en relation avec les acteurs locaux. Anime des clubs et réseaux d'entreprises du département et relaie les dispositifs régionaux et nationaux.",
+      "website": "https://www.tarn.cci.fr",
+      "keywords": [
+        "diagnostic énergétique",
+        "formalités",
+        "apprentissage",
+        "réseau d'entreprises",
+        "RSE",
+        "numérique",
+        "cybersécurité",
+        "club d'entreprises",
+        "digitalisation",
+        "industrie du futur",
+        "transformation numérique",
+        "diagnostic énergie"
+      ],
+      "domains": [
+        "Accompagnement",
+        "Formation",
+        "Énergie & Environnement",
+        "Numérique & Industrie 4.0"
+      ],
+      "sites": [
+        {
+          "label": "Siège",
+          "address": "",
+          "postal_code": "81000",
+          "city": "Albi"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Pôle appui aux entreprises",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "Communauté d'agglomération de l'Albigeois – Développement économique",
+      "description": "Service développement économique du Grand Albigeois (16 communes autour d'Albi) : accueil et accompagnement des projets d'implantation et d'extension, offre foncière et immobilière dans les zones d'activités de l'agglomération, mise en relation avec les partenaires (financeurs, formation, recherche), animation de l'écosystème local d'innovation. Premier interlocuteur pour une question de foncier, de locaux, d'aménagement ou de démarches d'urbanisme liées à un projet d'entreprise. Vous voulez agrandir votre atelier ou votre usine, déménager, trouver un terrain ou un bâtiment ? C'est le premier interlocuteur à contacter.",
+      "website": "https://www.grand-albigeois.fr",
+      "keywords": [
+        "zone d'activité",
+        "terrain",
+        "locaux",
+        "implantation",
+        "extension",
+        "agglomération",
+        "Grand Albigeois",
+        "permis de construire",
+        "urbanisme",
+        "PLUi",
+        "agrandir",
+        "agrandissement",
+        "atelier",
+        "déménagement",
+        "s'implanter",
+        "bâtiment industriel"
+      ],
+      "domains": [
+        "Foncier & Implantation",
+        "Accompagnement",
+        "Collectivité"
+      ],
+      "sites": [
+        {
+          "label": "Siège de l'agglomération",
+          "address": "Parc François Mitterrand",
+          "postal_code": "81160",
+          "city": "Saint-Juéry"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Direction du développement économique",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "Albi InnoProd – Technopole",
+      "description": "Technopole de l'Albigeois : pépinière et hôtel d'entreprises pour les start-up et PME innovantes, accompagnement à la création et au développement de projets innovants, mise en réseau avec les laboratoires (IMT Mines Albi, INU Champollion), les financeurs et les entreprises du territoire. Accueille des événements, ateliers et rencontres pour les entrepreneurs et porteurs de projets.",
+      "website": "",
+      "keywords": [
+        "technopole",
+        "pépinière",
+        "incubateur",
+        "start-up",
+        "hébergement",
+        "création d'entreprise",
+        "innovation",
+        "porteur de projet"
+      ],
+      "domains": [
+        "Innovation",
+        "Création d'entreprise",
+        "Accompagnement"
+      ],
+      "sites": [
+        {
+          "label": "Technopole",
+          "address": "",
+          "postal_code": "81000",
+          "city": "Albi"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Animation de la technopole",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "Mecanic Vallée",
+      "description": "Cluster industriel de la mécanique, de l'aéronautique et de la machine-outil, réunissant plusieurs centaines d'entreprises et de centres de formation du sud-ouest (Lot, Aveyron, Tarn, Corrèze…). Aide à identifier des sous-traitants et fournisseurs (usinage, tôlerie, traitement de surface, assemblage, mécano-soudure), organise des rencontres d'affaires et des actions collectives (formation, industrie du futur, décarbonation, attractivité des métiers).",
+      "website": "https://www.mecanicvallee.com",
+      "keywords": [
+        "sous-traitance",
+        "fournisseur",
+        "usinage",
+        "pièce métallique",
+        "mécanique",
+        "cluster",
+        "rencontres d'affaires",
+        "tôlerie",
+        "machine-outil"
+      ],
+      "domains": [
+        "Réseau & Cluster",
+        "Aéronautique & Mécanique",
+        "Matériaux & Procédés"
+      ],
+      "sites": [
+        {
+          "label": "Siège",
+          "address": "",
+          "postal_code": "46100",
+          "city": "Figeac"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Animation du cluster",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "Aerospace Valley",
+      "description": "Pôle de compétitivité aéronautique, spatial et drones des régions Occitanie et Nouvelle-Aquitaine : montage de projets de R&D collaboratifs, accès aux financements (Région, État, Europe), mise en relation donneurs d'ordres / PME, plateformes technologiques et programmes d'accélération. Utile pour un projet innovant en lien avec l'aéronautique, le spatial, les drones ou les systèmes embarqués.",
+      "website": "https://www.aerospace-valley.com",
+      "keywords": [
+        "pôle de compétitivité",
+        "R&D collaborative",
+        "aéronautique",
+        "spatial",
+        "drones",
+        "projet européen",
+        "systèmes embarqués",
+        "donneur d'ordres"
+      ],
+      "domains": [
+        "Innovation",
+        "Réseau & Cluster",
+        "Aéronautique & Mécanique",
+        "Financement"
+      ],
+      "sites": [
+        {
+          "label": "Siège",
+          "address": "",
+          "postal_code": "31000",
+          "city": "Toulouse"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Chargé de mission PME",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "Pôle formation UIMM Occitanie – Tarn",
+      "description": "Centre de formation des industries technologiques (CFAI et formation continue) : apprentissage du CAP au diplôme d'ingénieur dans les métiers de l'industrie (usinage, maintenance, chaudronnerie, soudage, électrotechnique, robotique, conduite de ligne), formation des salariés, accompagnement au recrutement d'alternants et promotion des métiers industriels. Répond aux besoins de compétences des entreprises industrielles du Tarn.",
+      "website": "",
+      "keywords": [
+        "CFAI",
+        "apprentissage",
+        "alternance",
+        "usinage",
+        "maintenance",
+        "chaudronnerie",
+        "soudage",
+        "formation continue",
+        "compétences industrielles",
+        "UIMM"
+      ],
+      "domains": [
+        "Formation",
+        "Recrutement & RH",
+        "Aéronautique & Mécanique"
+      ],
+      "sites": [
+        {
+          "label": "Antenne Tarn",
+          "address": "",
+          "postal_code": "81000",
+          "city": "Albi"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Conseiller formation entreprises",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "France Travail – Agence d'Albi",
+      "description": "Service public de l'emploi (ex-Pôle emploi) : diffusion des offres, présélection de candidats, recrutement par simulation (MRS), aides à l'embauche, préparation opérationnelle à l'emploi (POE) pour former un candidat avant son recrutement, conseil aux entreprises via une équipe dédiée. Interlocuteur pour recruter, notamment sur des métiers en tension de l'industrie.",
+      "website": "https://www.francetravail.fr",
+      "keywords": [
+        "recrutement",
+        "offre d'emploi",
+        "candidats",
+        "aide à l'embauche",
+        "POE",
+        "MRS",
+        "métiers en tension",
+        "Pôle emploi"
+      ],
+      "domains": [
+        "Recrutement & RH"
+      ],
+      "sites": [
+        {
+          "label": "Agence d'Albi",
+          "address": "",
+          "postal_code": "81000",
+          "city": "Albi"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Équipe entreprises",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "Mission Locale Tarn Nord",
+      "description": "Accompagnement des jeunes de 16 à 25 ans vers l'emploi et la formation sur le nord du Tarn. Pour les entreprises : mise en relation avec des jeunes candidats, aide au recrutement d'alternants et d'apprentis, périodes d'immersion professionnelle, information sur les contrats et les aides à l'embauche des jeunes.",
+      "website": "",
+      "keywords": [
+        "jeunes",
+        "alternance",
+        "apprenti",
+        "immersion",
+        "recrutement",
+        "insertion",
+        "premier emploi"
+      ],
+      "domains": [
+        "Recrutement & RH",
+        "Formation"
+      ],
+      "sites": [
+        {
+          "label": "Siège",
+          "address": "",
+          "postal_code": "81000",
+          "city": "Albi"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Chargé de relations entreprises",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "ADEME – Direction régionale Occitanie",
+      "description": "Agence de la transition écologique : aides et appels à projets pour la décarbonation de l'industrie, l'efficacité énergétique, la chaleur renouvelable (Fonds chaleur), l'économie circulaire et la gestion des déchets ; cofinancement d'études, de diagnostics et d'investissements ; ressources méthodologiques (bilan carbone, écoconception). Principal financeur public des projets de transition énergétique des entreprises.",
+      "website": "https://www.ademe.fr",
+      "keywords": [
+        "décarbonation",
+        "efficacité énergétique",
+        "Fonds chaleur",
+        "économie circulaire",
+        "déchets",
+        "appel à projets",
+        "diagnostic",
+        "bilan carbone",
+        "valorisation des déchets",
+        "recyclage",
+        "déchets industriels"
+      ],
+      "domains": [
+        "Énergie & Environnement",
+        "Financement"
+      ],
+      "sites": [
+        {
+          "label": "Direction régionale Occitanie",
+          "address": "",
+          "postal_code": "31000",
+          "city": "Toulouse"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Pôle entreprises et industrie",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "AREC Occitanie",
+      "description": "Agence régionale énergie climat de la Région Occitanie : accompagnement et cofinancement de projets d'énergies renouvelables (photovoltaïque, chaleur renouvelable, méthanisation, hydrogène), d'efficacité énergétique et de rénovation énergétique des bâtiments, pour les entreprises et les collectivités. Peut intervenir comme investisseur dans des projets territoriaux d'énergie.",
+      "website": "https://www.arec-occitanie.fr",
+      "keywords": [
+        "photovoltaïque",
+        "énergies renouvelables",
+        "méthanisation",
+        "efficacité énergétique",
+        "investissement",
+        "panneaux solaires",
+        "rénovation énergétique"
+      ],
+      "domains": [
+        "Énergie & Environnement",
+        "Financement"
+      ],
+      "sites": [
+        {
+          "label": "Siège",
+          "address": "",
+          "postal_code": "31000",
+          "city": "Toulouse"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Pôle accompagnement des projets",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "Cnam Occitanie – Centre d'Albi",
+      "description": "Conservatoire national des arts et métiers : formation professionnelle tout au long de la vie (cours du soir, à distance, alternance) du bac+1 au diplôme d'ingénieur, en informatique, données et intelligence artificielle, gestion, industrie, ressources humaines. Le centre d'Albi (IPST-Cnam) propose notamment des masters en alternance ; accompagne les entreprises pour former ou faire monter en compétences leurs salariés, valider les acquis (VAE) et accueillir des alternants.",
+      "website": "https://www.cnam-occitanie.fr",
+      "keywords": [
+        "formation continue",
+        "alternance",
+        "cours du soir",
+        "VAE",
+        "ingénieur",
+        "data",
+        "informatique",
+        "montée en compétences",
+        "IPST-Cnam"
+      ],
+      "domains": [
+        "Formation",
+        "Recrutement & RH",
+        "Numérique & Industrie 4.0"
+      ],
+      "sites": [
+        {
+          "label": "Centre d'Albi",
+          "address": "",
+          "postal_code": "81000",
+          "city": "Albi"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Accueil et relations entreprises",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "Chambre de Métiers et de l'Artisanat du Tarn",
+      "description": "Accompagne les entreprises artisanales (dont de nombreux sous-traitants industriels de moins de 11 salariés) : formalités, création, reprise et transmission d'entreprise, formation, apprentissage, développement (numérique, environnement). Peut orienter vers des artisans qualifiés du département (métallerie, usinage, électricité, menuiserie, maintenance…).",
+      "website": "",
+      "keywords": [
+        "artisan",
+        "artisanat",
+        "transmission d'entreprise",
+        "reprise",
+        "apprentissage",
+        "métallerie",
+        "sous-traitant local"
+      ],
+      "domains": [
+        "Accompagnement",
+        "Formation",
+        "Création d'entreprise"
+      ],
+      "sites": [
+        {
+          "label": "Siège",
+          "address": "",
+          "postal_code": "81000",
+          "city": "Albi"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Service économique",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "CRITT Mécanique & Composites",
+      "description": "Centre régional d'innovation et de transfert de technologie : prestations d'études, d'essais et de prototypage en mécanique, matériaux composites et métalliques, usinage, contrôle et caractérisation, pour les PME qui n'ont pas de bureau d'études ou de laboratoire en interne. Aide à passer de l'idée au prototype puis à l'industrialisation, en lien avec les laboratoires toulousains.",
+      "website": "",
+      "keywords": [
+        "prototype",
+        "essais",
+        "composites",
+        "usinage",
+        "bureau d'études",
+        "caractérisation",
+        "industrialisation",
+        "contrôle"
+      ],
+      "domains": [
+        "Innovation",
+        "Matériaux & Procédés",
+        "Aéronautique & Mécanique"
+      ],
+      "sites": [
+        {
+          "label": "Siège",
+          "address": "",
+          "postal_code": "31000",
+          "city": "Toulouse"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Chargé d'affaires",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "OPCO 2i",
+      "description": "Opérateur de compétences des industries (métallurgie, chimie, plasturgie, textile, papier-carton…) : financement des formations des salariés et des contrats d'apprentissage et de professionnalisation, conseil RH aux TPE-PME, appui au recrutement d'alternants, ingénierie de plan de développement des compétences, diagnostics RH.",
+      "website": "https://www.opco2i.fr",
+      "keywords": [
+        "OPCO",
+        "financement formation",
+        "alternance",
+        "plan de développement des compétences",
+        "conseil RH",
+        "contrat de professionnalisation",
+        "formation des salariés",
+        "financer la formation",
+        "financement de la formation"
+      ],
+      "domains": [
+        "Formation",
+        "Recrutement & RH",
+        "Financement"
+      ],
+      "sites": [
+        {
+          "label": "Délégation Occitanie",
+          "address": "",
+          "postal_code": "31000",
+          "city": "Toulouse"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Conseiller entreprises Tarn",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "Action Logement – Agence d'Albi",
+      "description": "Aide au logement des salariés des entreprises privées : logement temporaire ou meublé pour un nouvel embauché ou un salarié en mobilité, aide à la mobilité professionnelle, garantie locative (Visale), prêts et aides aux travaux. Interlocuteur pour faciliter l'installation d'un salarié recruté hors du territoire.",
+      "website": "https://www.actionlogement.fr",
+      "keywords": [
+        "logement temporaire",
+        "mobilité",
+        "nouvel embauché",
+        "garantie locative",
+        "aide au logement",
+        "Visale",
+        "installation"
+      ],
+      "domains": [
+        "Recrutement & RH",
+        "Mobilité & Logement"
+      ],
+      "sites": [
+        {
+          "label": "Agence d'Albi",
+          "address": "",
+          "postal_code": "81000",
+          "city": "Albi"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Conseiller entreprises",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    },
+    {
+      "name": "Toulouse Tech Transfer (SATT)",
+      "description": "Société d'accélération du transfert de technologies de l'académie de Toulouse : maturation et licence de technologies issues des laboratoires publics (dont IMT Mines Albi et l'Université de Toulouse), montage de partenariats de recherche, propriété intellectuelle et brevets. Pour une entreprise cherchant une technologie ou une expertise de laboratoire à intégrer dans un produit ou un procédé.",
+      "website": "https://www.toulouse-tech-transfer.com",
+      "keywords": [
+        "transfert de technologie",
+        "licence",
+        "brevet",
+        "laboratoire",
+        "maturation",
+        "propriété intellectuelle",
+        "SATT"
+      ],
+      "domains": [
+        "Innovation",
+        "Recherche"
+      ],
+      "sites": [
+        {
+          "label": "Siège",
+          "address": "",
+          "postal_code": "31000",
+          "city": "Toulouse"
+        }
+      ],
+      "contacts": [
+        {
+          "role": "Business developer",
+          "email": "",
+          "phone": ""
+        }
+      ]
+    }
+  ]
+}
