@@ -1,0 +1,23 @@
+services:
+  api:
+    build:
+      context: .
+      args:
+        EMBEDDING_MODEL: ${CHATBOT_EMBEDDING_MODEL:-intfloat/multilingual-e5-small}
+    image: chatbot-tarn-nord-api:latest
+    container_name: chatbot-api
+    ports:
+      - "${CHATBOT_PORT:-8000}:8000"
+    environment:
+      CHATBOT_MIN_SCORE: ${CHATBOT_MIN_SCORE:-0.825}
+      CHATBOT_CORS_ORIGINS: ${CHATBOT_CORS_ORIGINS:-http://localhost:3000,http://localhost:5173}
+      CHATBOT_API_KEY: ${CHATBOT_API_KEY:-}
+      CHATBOT_ANALYTICS_RETENTION_DAYS: ${CHATBOT_ANALYTICS_RETENTION_DAYS:-365}
+      CHATBOT_LOG_LEVEL: ${CHATBOT_LOG_LEVEL:-INFO}
+    volumes:
+      - ./corpus:/corpus:ro         # fiches documentaires (lecture seule) — POST /admin/reindex après modification
+      - chatbot-data:/data          # base SQLite (annuaire, config, journal) + index ChromaDB
+    restart: unless-stopped
+
+volumes:
+  chatbot-data:
