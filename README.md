@@ -44,7 +44,11 @@ npm run dev
 | `/`      | Chat public                          |
 | `/admin` | Back-office (annuaire, stats, config)|
 
-## Contrat front ↔ back (résumé)
+## Contrat front ↔ back (implémenté)
+
+Le front appelle réellement l'API : tout passe par le client [`frontend/src/app/lib/api.ts`], qui lit l'URL du
+backend dans `VITE_API_URL`. Il n'y a plus aucune réponse écrite en dur côté interface : si le service est
+injoignable, le chat l'affiche au lieu d'inventer une réponse.
 
 | Écran front | Endpoints backend |
 |---|---|
@@ -53,8 +57,11 @@ npm run dev
 | Admin › Analytiques | `GET /admin/analytics?days=7` (conversations/jour, sujets, questions fréquentes et sans réponse, satisfaction, latence) |
 | Admin › Configuration | `GET/PUT /admin/config`, `POST /admin/config/reset` |
 
-Les endpoints `/admin/*` exigent le header `X-API-Key` (variable `CHATBOT_API_KEY` du backend). Détails, exemples
-et règles de fiabilité dans [`backend/README.md`](backend/README.md).
+Les endpoints `/admin/*` exigent le header `X-API-Key` (variable `CHATBOT_API_KEY` du backend). La clé se saisit
+dans le bandeau en haut de `/admin` : elle reste dans le navigateur de l'administrateur et n'est jamais écrite dans
+le code ni dans un fichier du dépôt. Tant que `CHATBOT_API_KEY` n'est pas définie côté serveur, le back-office
+fonctionne sans clé (mode développement). Détails, exemples et règles de fiabilité dans
+[`backend/README.md`](backend/README.md).
 
 ## Équipe
 

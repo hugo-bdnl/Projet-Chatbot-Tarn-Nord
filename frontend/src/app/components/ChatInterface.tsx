@@ -1,31 +1,41 @@
 import { useState, useRef, useEffect } from "react";
-import { Send, Bot, User } from "lucide-react";
+import { Send, Bot, User, ThumbsUp, ThumbsDown, MapPin, Phone, Mail, Globe, AlertCircle } from "lucide-react";
+import {
+  ask,
+  getPublicConfig,
+  sendFeedback,
+  errorMessage,
+  type AskResponse,
+  type DocumentExtract,
+  type OrganizationResult,
+} from "../lib/api";
 
 interface Message {
   id: string;
-  type: "user" | "bot";
+  type: "user" | "bot" | "error";
   content: string;
   timestamp: Date;
   suggestions?: string[];
+  organizations?: OrganizationResult[];
+  documents?: DocumentExtract[];
+  queryId?: number | null;
+  feedback?: boolean | null;
+  answered?: boolean;
 }
 
-const initialMessage: Message = {
+const LOADING_MESSAGE: Message = {
   id: "0",
   type: "bot",
-  content: "Bonjour ! Je suis le chatbot du Grand Albigeois. Comment puis-je vous aider aujourd'hui ? Je peux vous orienter vers les acteurs de l'innovation du territoire pour vos projets.",
+  content: "Connexion au service...",
   timestamp: new Date(),
-  suggestions: [
-    "J'ai besoin d'une pièce métallique spécifique",
-    "Je cherche des aides pour innover",
-    "Je recherche des solutions RH",
-    "J'ai un projet de transition énergétique"
-  ]
 };
 
 export function ChatInterface() {
-  const [messages, setMessages] = useState<Message[]>([initialMessage]);
+  const [messages, setMessages] = useState<Message[]>([LOADING_MESSAGE]);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [botName, setBotName] = useState("Assistant Grand Albigeois");
+  const [online, setOnline] = useState<boolean | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -36,54 +46,48 @@ export function ChatInterface() {
     scrollToBottom();
   }, [messages]);
 
-  const getBotResponse = (userMessage: string): { content: string; suggestions?: string[] } => {
-    const lowerMessage = userMessage.toLowerCase();
-    
-    if (lowerMessage.includes("pièce") || lowerMessage.includes("métallique") || lowerMessage.includes("fournisseur")) {
-      return {
-        content: "Je comprends que vous recherchez un fournisseur de pièces métalliques. Je peux vous orienter vers plusieurs acteurs spécialisés :\n\n• **IMT Mines Albi** - Laboratoire de métallurgie et procédés\n• **Centre Technique ICA** - Spécialiste en fabrication additive métallique\n• **Plateforme CRITT** - Expertise en usinage de précision\n\nSouhaitez-vous plus d'informations sur l'un de ces acteurs ?",
-        suggestions: ["En savoir plus sur IMT Mines Albi", "Contacter le Centre ICA", "Voir d'autres acteurs"]
-      };
-    } else if (lowerMessage.includes("aide") || lowerMessage.includes("innov") || lowerMessage.includes("financement")) {
-      return {
-        content: "Pour vos besoins en innovation et financement, plusieurs organismes peuvent vous accompagner :\n\n• **AD'OCC** - Aides régionales et accompagnement des entreprises\n• **BPI France** - Prêts et subventions pour l'innovation\n• **CNAM Formation** - Formation et développement des compétences\n\nDe quel type d'aide avez-vous besoin ?",
-        suggestions: ["Financement de projets", "Accompagnement stratégique", "Formation des équipes"]
-      };
-    } else if (lowerMessage.includes("rh") || lowerMessage.includes("recrutement") || lowerMessage.includes("formation")) {
-      return {
-        content: "Pour vos besoins en ressources humaines, voici les structures qui peuvent vous accompagner :\n\n• **Pôle Emploi Albi** - Recrutement et sourcing\n• **CNAM Formation Continue** - Formation professionnelle\n• **Mission Locale** - Recrutement de jeunes talents\n• **OPCO** - Financement des formations\n\nQuel est votre besoin prioritaire ?",
-        suggestions: ["Recruter du personnel", "Former mes équipes", "Mobilité des salariés"]
-      };
-    } else if (lowerMessage.includes("énergie") || lowerMessage.includes("énergétique") || lowerMessage.includes("environnement")) {
-      return {
-        content: "Pour vos projets de transition énergétique, plusieurs acteurs peuvent vous conseiller :\n\n• **Centre RAPSODEE** - Recherche sur l'énergie et l'environnement\n• **ADEME Occitanie** - Aides à la transition écologique\n• **CCI Tarn** - Diagnostic énergétique entreprise\n\nAvez-vous déjà un projet défini ?",
-        suggestions: ["Réduire ma consommation", "Énergies renouvelables", "Diagnostic énergétique"]
-      };
-    } else if (lowerMessage.includes("merci") || lowerMessage.includes("parfait")) {
-      return {
-        content: "Avec plaisir ! N'hésitez pas si vous avez d'autres questions. Je suis là pour vous aider à trouver les bons interlocuteurs.",
-        suggestions: ["Poser une autre question", "Voir tous les acteurs"]
-      };
-    } else {
-      return {
-        content: "Je peux vous aider à trouver les bons interlocuteurs pour vos projets. Pouvez-vous préciser votre besoin ?\n\nJe peux vous orienter vers :\n• Des laboratoires de recherche\n• Des plateformes techniques\n• Des centres de formation\n• Des organismes de financement",
-        suggestions: [
-          "Recherche et innovation",
-          "Formation et RH",
-          "Transition énergétique",
-          "Financement"
-        ]
-      };
-    }
-  };
+  // Message d'accueil, nom et suggestions initiales : tout vient de GET /config,
+  // donc l'administrateur les change depuis le back-office sans toucher au code.
+  useEffect(() => {
+    let cancelled = false;
+    getPublicConfig()
+      .then((config) => {
+        if (cancelled) return;
+        setBotName(config.name);
+        setOnline(true);
+        setMessages([
+          {
+            id: "0",
+            type: "bot",
+            content: config.welcome_message,
+            timestamp: new Date(),
+            suggestions: config.initial_suggestions,
+          },
+        ]);
+      })
+      .catch((error) => {
+        if (cancelled) return;
+        setOnline(false);
+        setMessages([
+          {
+            id: "0",
+            type: "error",
+            content: errorMessage(error),
+            timestamp: new Date(),
+          },
+        ]);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
-  const handleSend = (text?: string) => {
-    const messageText = text || inputValue.trim();
-    if (!messageText) return;
+  const handleSend = async (text?: string) => {
+    const messageText = (text || inputValue).trim();
+    if (!messageText || isTyping) return;
 
-    // Add user message
     const userMessage: Message = {
-      id: Date.now().toString(),
+      id: `u-${Date.now()}`,
       type: "user",
       content: messageText,
       timestamp: new Date(),
@@ -93,20 +97,49 @@ export function ChatInterface() {
     setInputValue("");
     setIsTyping(true);
 
-    // Simulate bot response
-    setTimeout(() => {
-      const response = getBotResponse(messageText);
-      const botMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        type: "bot",
-        content: response.content,
-        timestamp: new Date(),
-        suggestions: response.suggestions,
-      };
-
-      setMessages((prev) => [...prev, botMessage]);
+    try {
+      const response: AskResponse = await ask(messageText);
+      setOnline(true);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `b-${Date.now()}`,
+          type: "bot",
+          content: response.answer,
+          timestamp: new Date(),
+          suggestions: response.suggestions,
+          organizations: response.organizations,
+          documents: response.documents,
+          queryId: response.query_id,
+          feedback: null,
+          answered: response.answered,
+        },
+      ]);
+    } catch (error) {
+      // Aucune reponse de secours inventee cote front : le chatbot ne repond
+      // que ce que le serveur a valide (regle de fiabilite du back-end).
+      setOnline(false);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `e-${Date.now()}`,
+          type: "error",
+          content: errorMessage(error),
+          timestamp: new Date(),
+        },
+      ]);
+    } finally {
       setIsTyping(false);
-    }, 1000);
+    }
+  };
+
+  const handleFeedback = async (messageId: string, queryId: number, helpful: boolean) => {
+    setMessages((prev) => prev.map((m) => (m.id === messageId ? { ...m, feedback: helpful } : m)));
+    try {
+      await sendFeedback(queryId, helpful);
+    } catch {
+      setMessages((prev) => prev.map((m) => (m.id === messageId ? { ...m, feedback: null } : m)));
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -125,8 +158,10 @@ export function ChatInterface() {
             <Bot className="text-[rgb(4,108,180)]" size={24} />
           </div>
           <div>
-            <h2 className="font-semibold">Assistant Grand Albigeois</h2>
-            <p className="text-sm text-white/90">En ligne</p>
+            <h2 className="font-semibold">{botName}</h2>
+            <p className="text-sm text-white/90">
+              {online === null ? "Connexion..." : online ? "En ligne" : "Service indisponible"}
+            </p>
           </div>
         </div>
       </div>
@@ -140,30 +175,86 @@ export function ChatInterface() {
                 message.type === "user" ? "justify-end" : "justify-start"
               }`}
             >
-              {message.type === "bot" && (
-                <div className="w-8 h-8 bg-[rgb(4,108,180)] rounded-full flex items-center justify-center flex-shrink-0">
-                  <Bot className="text-white" size={18} />
+              {message.type !== "user" && (
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                    message.type === "error" ? "bg-red-100" : "bg-[rgb(4,108,180)]"
+                  }`}
+                >
+                  {message.type === "error" ? (
+                    <AlertCircle className="text-red-600" size={18} />
+                  ) : (
+                    <Bot className="text-white" size={18} />
+                  )}
                 </div>
               )}
-              
+
               <div
                 className={`max-w-[70%] rounded-2xl px-4 py-3 ${
                   message.type === "user"
                     ? "bg-[rgb(4,108,180)] text-white"
-                    : "bg-white border border-slate-200 text-slate-900"
+                    : message.type === "error"
+                      ? "bg-red-50 border border-red-200 text-red-800"
+                      : "bg-white border border-slate-200 text-slate-900"
                 }`}
               >
                 <p className="whitespace-pre-line">{message.content}</p>
-                <p
-                  className={`text-xs mt-2 ${
-                    message.type === "user" ? "text-white/80" : "text-slate-500"
-                  }`}
-                >
-                  {message.timestamp.toLocaleTimeString("fr-FR", {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </p>
+
+                {/* Coordonnees des acteurs proposes : elles viennent de l'annuaire,
+                    jamais du texte de la reponse (REQ-FUNC.2). */}
+                {message.organizations && message.organizations.length > 0 && (
+                  <div className="mt-3 space-y-2">
+                    {message.organizations.map((org) => (
+                      <OrganizationCard key={org.id} organization={org} />
+                    ))}
+                  </div>
+                )}
+
+                {message.documents && message.documents.length > 0 && (
+                  <p className="mt-3 text-xs text-slate-500">
+                    Source : {message.documents[0].title}
+                    {message.documents[0].section ? ` › ${message.documents[0].section}` : ""}
+                  </p>
+                )}
+
+                <div className="flex items-center justify-between gap-3 mt-2">
+                  <p
+                    className={`text-xs ${
+                      message.type === "user" ? "text-white/80" : "text-slate-500"
+                    }`}
+                  >
+                    {message.timestamp.toLocaleTimeString("fr-FR", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </p>
+
+                  {/* Evaluation de la reponse (REQ-FUNC.3) : POST /feedback */}
+                  {message.type === "bot" && typeof message.queryId === "number" && (
+                    <div className="flex items-center gap-1">
+                      {message.feedback === null ? (
+                        <>
+                          <button
+                            aria-label="Cette réponse est utile"
+                            onClick={() => handleFeedback(message.id, message.queryId as number, true)}
+                            className="p-1 text-slate-400 hover:text-[rgb(4,108,180)] transition-colors"
+                          >
+                            <ThumbsUp size={14} />
+                          </button>
+                          <button
+                            aria-label="Cette réponse n'est pas utile"
+                            onClick={() => handleFeedback(message.id, message.queryId as number, false)}
+                            className="p-1 text-slate-400 hover:text-red-600 transition-colors"
+                          >
+                            <ThumbsDown size={14} />
+                          </button>
+                        </>
+                      ) : (
+                        <span className="text-xs text-slate-400">Merci pour votre retour</span>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
 
               {message.type === "user" && (
@@ -174,7 +265,7 @@ export function ChatInterface() {
             </div>
 
             {/* Suggestions */}
-            {message.type === "bot" && message.suggestions && (
+            {message.type === "bot" && message.suggestions && message.suggestions.length > 0 && (
               <div className="ml-11 mt-2 flex flex-wrap gap-2">
                 {message.suggestions.map((suggestion, idx) => (
                   <button
@@ -221,12 +312,61 @@ export function ChatInterface() {
           />
           <button
             onClick={() => handleSend()}
-            disabled={!inputValue.trim()}
+            disabled={!inputValue.trim() || isTyping}
             className="px-6 py-3 bg-[rgb(4,108,180)] text-white rounded-lg hover:bg-[rgb(4,90,150)] disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
           >
             <Send size={20} />
           </button>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function OrganizationCard({ organization }: { organization: OrganizationResult }) {
+  const site = organization.sites[0];
+  const contact = organization.contacts[0];
+  const website = organization.website.replace(/^https?:\/\//, "");
+
+  return (
+    <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm">
+      <p className="font-medium text-slate-900">{organization.name}</p>
+      <div className="mt-1 space-y-1 text-xs text-slate-600">
+        {site && (site.address || site.city) && (
+          <p className="flex items-center gap-2">
+            <MapPin size={12} className="text-slate-400 flex-shrink-0" />
+            <span>
+              {[site.address, [site.postal_code, site.city].filter(Boolean).join(" ")]
+                .filter(Boolean)
+                .join(", ")}
+            </span>
+          </p>
+        )}
+        {contact && contact.phone && (
+          <p className="flex items-center gap-2">
+            <Phone size={12} className="text-slate-400 flex-shrink-0" />
+            <span>{contact.phone}</span>
+          </p>
+        )}
+        {contact && contact.email && (
+          <p className="flex items-center gap-2">
+            <Mail size={12} className="text-slate-400 flex-shrink-0" />
+            <span>{contact.email}</span>
+          </p>
+        )}
+        {organization.website && (
+          <p className="flex items-center gap-2">
+            <Globe size={12} className="text-slate-400 flex-shrink-0" />
+            <a
+              href={organization.website.startsWith("http") ? organization.website : `https://${website}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[rgb(4,108,180)] hover:underline"
+            >
+              {website}
+            </a>
+          </p>
+        )}
       </div>
     </div>
   );
